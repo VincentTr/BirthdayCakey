@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         //cp2
         //retrieve the reference to the "Blow Out" button (step 11)
-        Button blowButton = findViewById(R.id.blowOutButton);
+        Button blowButton = findViewById(R.id.Extinguish);
         blowButton.setOnClickListener(control);
 
         //cp3
