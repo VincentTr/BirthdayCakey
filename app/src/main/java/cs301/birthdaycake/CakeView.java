@@ -36,6 +36,18 @@ public class CakeView extends SurfaceView {
 
 
 
+
+
+    //Changes from Lab 3 (part3 and 4 of cp1)
+    private CakeModel cake;
+
+    public CakeModel getCake(){
+        return cake;
+    }
+
+
+
+
     /**
      * ctor must be overridden here as per standard Java inheritance practice.  We need it
      * anyway to initialize the member variables
@@ -62,6 +74,9 @@ public class CakeView extends SurfaceView {
 
         setBackgroundColor(Color.WHITE);  //better than black default
 
+        //part3 of cp1
+        cake = new CakeModel();
+
     }
 
     /**
@@ -71,14 +86,17 @@ public class CakeView extends SurfaceView {
     public void drawCandle(Canvas canvas, float left, float bottom) {
         canvas.drawRect(left, bottom - candleHeight, left + candleWidth, bottom, candlePaint);
 
-        //draw the outer flame
-        float flameCenterX = left + candleWidth/2;
-        float flameCenterY = bottom - wickHeight - candleHeight - outerFlameRadius/3;
-        canvas.drawCircle(flameCenterX, flameCenterY, outerFlameRadius, outerFlamePaint);
+        if(cake.lit == true){
+            //draw the outer flame
+            float flameCenterX = left + candleWidth/2;
+            float flameCenterY = bottom - wickHeight - candleHeight - outerFlameRadius/3;
+            canvas.drawCircle(flameCenterX, flameCenterY, outerFlameRadius, outerFlamePaint);
 
-        //draw the inner flame
-        flameCenterY += outerFlameRadius/3;
-        canvas.drawCircle(flameCenterX, flameCenterY, innerFlameRadius, innerFlamePaint);
+            //draw the inner flame
+            flameCenterY += outerFlameRadius/3;
+            canvas.drawCircle(flameCenterX, flameCenterY, innerFlameRadius, innerFlamePaint);
+        }
+
 
         //draw the wick
         float wickLeft = left + candleWidth/2 - wickWidth/2;
@@ -119,11 +137,16 @@ public class CakeView extends SurfaceView {
         //Then a second cake layer
         canvas.drawRect(cakeLeft, top, cakeLeft + cakeWidth, bottom, cakePaint);
 
-        //Now a candle on the left side
-        drawCandle(canvas, cakeLeft + (cakeWidth/4) - candleWidth/2, cakeTop);
-        //both of the candles on the cake are equidistant from each other
-        //Now, draw a candle at the right side
-        drawCandle(canvas, cakeLeft + (3*(cakeWidth/4)) - candleWidth/2, cakeTop);
+        if(cake.hasCandles == true){
+            //even number of candles
+            //int sections = 2;
+            //int sectionWidth = (int)cakeWidth;
+            for(int i = 1; i <= cake.numOfCandles; i++){
+                drawCandle(canvas,cakeWidth/((cake.numOfCandles+1))*i + cakeLeft, cakeTop);
+                //sections++;
+                //sectionWidth = (int) (cakeWidth/sections);
+            }//for
+        }//if
 
     }//onDraw
 
