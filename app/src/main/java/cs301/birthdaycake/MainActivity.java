@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         CakeView view = findViewById(R.id.cakeview);
         CakeController control = new CakeController(view);
+        view.setOnTouchListener(control);
 
         //cp2
         //retrieve the reference to the "Blow Out" button (step 11)
