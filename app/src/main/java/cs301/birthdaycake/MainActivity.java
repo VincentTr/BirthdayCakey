@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
         SeekBar candleSeekBar = findViewById(R.id.numOfCandlesSeekBar);
         candleSeekBar.setOnSeekBarChangeListener(control);
 
+        view.setOnTouchListener(control);
+
     }
     public void goodbye(View button){
         Log.i("button", "Goodbye");
